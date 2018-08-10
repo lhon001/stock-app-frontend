@@ -1,5 +1,6 @@
 const defaultState = {
   stock: '',
+  loggedIn: false,
 }
 
 const reducer = (state = defaultState, action = {}) => {
