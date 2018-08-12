@@ -1,19 +1,24 @@
 const defaultState = {
+  content: '',
   stock: '',
-  loggedIn: false,
+  signUpState: false,
+  loginState: false,
+  currentUser: null
 }
 
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type){
     case 'SAVE_SEARCHED_STOCK':
-      return {...state, stock: action.payload}
+      return {...state, stock: action.payload.stockObj, content: action.payload.content}
+    case 'SIGNUP':
+      return {...state, signUpState: action.payload.signUpState, content: action.payload.content}
+    case 'SHOW_USER_PAGE':
+      return {...state, currentUser: action.payload.currentUser, content: action.payload.content}
+    case 'LOGIN':
+      return {...state, loginState: action.payload.loginState, content: action.payload.content}
     default:
       return state
   }
-}
-
-const displayStock = (state = [], action) => {
-
 }
 
 export default reducer

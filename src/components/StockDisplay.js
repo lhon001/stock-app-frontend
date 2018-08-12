@@ -29,7 +29,7 @@ class StockDisplay extends React.Component{
       <Line data={{labels: dayArray,
           datasets: [{
             label: this.props.stock.symbol,
-            backgroundColor: 'rgb(255, 99, 132)',
+            // backgroundColor: 'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: closeArray,
           }]
@@ -53,7 +53,9 @@ class StockDisplay extends React.Component{
 }
 
 const mapStateToProps = (state) => {
-  return {stock: state.stock};
+  return {
+    stock: state.stock
+  };
 }
 
 export default connect(mapStateToProps)(StockDisplay)

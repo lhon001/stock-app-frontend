@@ -32,7 +32,7 @@ class SearchInput extends React.Component{
 }
   const mapDispatchToProps = (dispatch) => {
     return {
-      searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: stockObj})
+      searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}})
     }
   }
 

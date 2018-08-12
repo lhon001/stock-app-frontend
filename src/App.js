@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Display from './components/Display'
+import UserSignUp from './components/UserSignUp'
 import UserLogin from './components/UserLogin'
 import SearchInput from './components/SearchInput'
-import StockDisplay from './components/StockDisplay'
-import { getStockInfo } from './adapter'
+import { getStockInfo, createUser } from './adapter'
 
 class App extends Component {
-
-
-  findStock = () => {
-
-  }
+  // state = {
+  //   display: 'home',
+  // }
 
   render() {
     return (
       <div>
+        <UserSignUp />
         <UserLogin />
-        <SearchInput className='form' findStock={this.findStock} />
-        <StockDisplay />
+        <SearchInput className='form'/>
+        <Display />
       </div>
     );
   }
