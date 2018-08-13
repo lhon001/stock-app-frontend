@@ -18,6 +18,8 @@ class Display extends React.Component{
         return <LoginForm />
       case 'userPage':
         return <UserPage />
+      case 'invalid':
+        return <h5>Invalid stock symbol, please try again</h5>
       default:
         return null
     }

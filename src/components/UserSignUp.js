@@ -6,7 +6,7 @@ class UserSignUp extends React.Component{
   render(){
     return(
       <div>
-        <button onClick={this.props.signUpUser}>Sign Up</button>
+        <button className="btn-small waves-effect waves-light material-icons right" onClick={this.props.signUpUser}>Sign Up</button>
       </div>
     )
   }

@@ -3,12 +3,10 @@ import { connect } from 'react-redux'
 
 class UserPage extends React.Component {
   render(){
-    // debugger
-    // console.log(this.props);
+    // console.log(this.props.currentUser);
     return (
       <div>
-        <h1>{this.props.currentUser.name}'s Account</h1>
-
+        <h5>{this.props.currentUser.name}'s Account</h5>
       </div>
     )
   }

@@ -6,37 +6,49 @@ class SignUpForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+
     const newUser = {
       name: e.target.name.value,
       username: e.target.username.value,
       password: e.target.password.value
     }
+
     createUser(newUser)
-    this.props.userPage(newUser)
+      .then(createdUser => {
+        console.log(createdUser);
+        this.props.userPage(createdUser)
+        localStorage.setItem('currentUser', createdUser.id)
+      })
   }
 
   render(){
     return (
-      <div>
-        <h2 className="App">Create New Account</h2>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <br></br>
-
-          <label>Name</label>
-          <input type="text" name='name'></input>
-          <br></br>
-
-          <label>Username</label>
-          <input type="text" name="username"></input>
-          <br></br>
-
-          <label>Password</label>
-          <input type="text" name="password"></input>
-          <br></br>
-
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+      <div className="row">
+        <h4>Sign Up</h4>
+         <form className="col s12" onSubmit={(e) => this.handleSubmit(e)}>
+           <div className="row">
+             <div className="input-field col s12">
+               <input placeholder="Name" id="name" type="text" name="name"/>
+               {/* <label for="name">Name</label> */}
+             </div>
+           </div>
+           <div className="row">
+             <div className="input-field col s12">
+               <input placeholder="Username" id="username" type="text" name="username"/>
+               {/* <label for="username">Username</label> */}
+             </div>
+           </div>
+           <div className="row">
+             <div className="input-field col s12">
+               <input placeholder="Password" id="password" type="password" name="password"/>
+               {/* <label for="password">Password</label> */}
+             </div>
+           </div>
+           <div>
+             <button className="btn-small waves-effect waves-light material-icons right" type="submit">Sign Up</button>
+           </div>
+         </form>
+       </div>
     )
   }
 

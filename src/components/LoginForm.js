@@ -10,29 +10,36 @@ class LoginForm extends React.Component {
       username: e.target.username.value,
       password: e.target.password.value
     }
+
     loginUser(user)
       // .then(console.log(this.props))
-      .then(loggedInUser => this.props.userPage(loggedInUser))
+      .then(loggedInUser => {
+        this.props.userPage(loggedInUser)
+        localStorage.setItem('currentUser', loggedInUser.id)
+      })
+
   }
 
   render(){
     return (
-      <div>
-        <h2 className="App">Login</h2>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
-          <br></br>
-
-          <label>Username</label>
-          <input type="text" name="username"></input>
-          <br></br>
-
-          <label>Password</label>
-          <input type="text" name="password"></input>
-          <br></br>
-
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+      <div className="row">
+        <h4>Login</h4>
+         <form className="col s12" onSubmit={this.handleSubmit}>
+           <div className="row">
+             <div className="input-field col s12">
+               <input placeholder="Username" id="username" type="text" />
+               {/* <label for="username">Username</label> */}
+             </div>
+           </div>
+           <div className="row">
+             <div className="input-field col s12">
+               <input placeholder="Password" id="password" type="password" name='password'/>
+               {/* <label for="password">Password</label> */}
+             </div>
+           </div>
+           <button className="btn-small waves-effect waves-light material-icons right">Login</button>
+         </form>
+       </div>
     )
   }
 

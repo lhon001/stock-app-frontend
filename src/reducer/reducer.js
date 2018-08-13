@@ -16,6 +16,10 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, currentUser: action.payload.currentUser, content: action.payload.content}
     case 'LOGIN':
       return {...state, loginState: action.payload.loginState, content: action.payload.content}
+    case 'LOGOUT':
+      return {...state, loginState: action.payload.loginState, currentUser: action.payload.currentUser, content: ''}
+    case 'INVALID_STOCK_SYMBOL':
+      return {...state, content: action.payload.content}
     default:
       return state
   }

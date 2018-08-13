@@ -15,7 +15,6 @@ export function createUser(userObj) {
 
   return fetch(url, options)
     .then(r => r.json())
-    .then(user => console.log(user))
 }
 
 export function loginUser(userObj) {
@@ -28,5 +27,11 @@ export function loginUser(userObj) {
 
   return fetch(url, options)
     .then(r => r.json())
-    // .then(user => console.log(user))
+}
+
+export function getUser(userID) {
+  const url = `http://localhost:3000/api/v1/users/${userID}`
+
+  return fetch(url)
+    .then(r => r.json())
 }

@@ -4,18 +4,27 @@ import { getStockInfo } from '../adapter'
 
 class SearchInput extends React.Component{
   state = {
-    text: ''
+    input: ''
   }
+
+  // {status: 500, error: "Internal Server Error", exception: "#<RestClient::NotFound: 404 Not Found>", traces: {…}}
 
   handleSubmit = (e) => {
     e.preventDefault()
-    getStockInfo(this.state.text)
-      .then(data => this.props.searchStock(data))
+
+    getStockInfo(this.state.input)
+      .then(resp => {
+        if (resp.status === 500){
+          this.props.invalidStock()
+        } else {
+          this.props.searchStock(resp)
+        }
+      })
   }
 
   handleChange = (e) => {
     this.setState({
-      text: e.target.value
+      input: e.target.value
     })
   }
 
@@ -23,8 +32,8 @@ class SearchInput extends React.Component{
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input type="text" onChange={(e) => this.handleChange(e)} value={this.state.text}></input>
-          <button type="submit">Search</button>
+          <input placeholder='Enter Stock Symbol (e.g. tsla)' type="text" onChange={(e) => this.handleChange(e)} value={this.state.text}></input>
+          {/* <button className="btn-small waves-effect waves-light material-icons right" type="submit">Search</button> */}
         </form>
       </div>
     )
@@ -32,7 +41,8 @@ class SearchInput extends React.Component{
 }
   const mapDispatchToProps = (dispatch) => {
     return {
-      searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}})
+      searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}}),
+      invalidStock: () => dispatch({type: "INVALID_STOCK_SYMBOL", payload: {content: 'invalid'}})
     }
   }
 
