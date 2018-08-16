@@ -16,16 +16,17 @@ class SignUpForm extends React.Component {
     if (!newUser.name || !newUser.username || !newUser.password){
       alert("Please fill all fields to create an account")
     } else {
-      if (createUser(newUser) === "Username already taken" || createUser(newUser) === "User not created"){
-        alert("Username already taken")
-      } else {
-        createUser(newUser)
-          .then(createdUser => {
+      createUser(newUser)
+        .then(createdUser => {
+          if (createdUser === "Username already taken" || createdUser === "User not created"){
+            alert("Username already taken")
+          } else {
             console.log(createdUser);
             this.props.userPage(createdUser)
             localStorage.setItem('currentUser', createdUser.id)
-          })
-      }
+          }
+        }
+      )
     }
   }
 
