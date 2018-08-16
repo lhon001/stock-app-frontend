@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 class UserLogout extends React.Component{
 
   handleClick = () => {
-    console.log("loggin out");
+    // console.log("loggin out");
     this.props.logoutUser()
     localStorage.removeItem('currentUser')
   }

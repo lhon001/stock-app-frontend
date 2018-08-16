@@ -11,13 +11,23 @@ class LoginForm extends React.Component {
       password: e.target.password.value
     }
 
-    loginUser(user)
-      // .then(console.log(this.props))
-      .then(loggedInUser => {
-        this.props.userPage(loggedInUser)
-        localStorage.setItem('currentUser', loggedInUser.id)
-      })
-
+    if (!user.username || !user.password){
+      alert("Must enter a valid Username and Password")
+    } else {
+      if (loginUser(user)){
+        loginUser(user).then(resp => {
+          if (resp.error !== "login failed"){
+            loginUser(user)
+              .then(loggedInUser => {
+                this.props.userPage(loggedInUser)
+                localStorage.setItem('currentUser', loggedInUser.id)
+              })
+          } else {
+            alert("Account not found, please try logging in again")
+          }
+        })
+      }
+    }
   }
 
   render(){

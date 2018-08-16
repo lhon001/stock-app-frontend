@@ -2,22 +2,57 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Line } from 'react-chartjs-2'
 import { ReactTable } from 'react-table'
+import { createStock, saveStockToPortfolio, getUsersStocks, getPortfolios } from '../adapter'
 
 class StockDisplay extends React.Component{
   state = {
     priceArray: [],
-    dateArray: [],
+    dateArray: []
   }
 
   setPriceArray = () => {
     // console.log(this.props.stock.chart);
     const closeArray = this.props.stock.chart.map((day) => day.close)
-    console.log(this.state.priceArray);
+    // console.log(this.state.priceArray);
   }
 
   setDateArray = () => {
     const dayArray = this.props.stock.chart.map((day) => day.date)
     // console.log(dayArray);
+  }
+
+
+  handleClick = () => {
+    // check if stock exists in portfolio first
+    let userPortfolios = []
+    console.log('before: ', userPortfolios);
+    getPortfolios(this.props.currentUser)
+      .then(portfolios => {
+        return (
+          portfolios.forEach((singlePortfolio) => {
+            userPortfolios.push(singlePortfolio)
+          })
+        )
+      })
+
+    console.log("after: ", userPortfolios);
+
+    let currentUserStocks = []
+    getUsersStocks(this.props.currentUser)
+      .then(userStocks => {
+        console.log(userStocks);
+        currentUserStocks = userStocks.filter(stock => stock.companyName === this.props.stock.companyName)
+        if (!currentUserStocks.length > 0){
+          console.log(userPortfolios[0].id);
+          createStock(this.props.stock) // create the stock
+          .then(stock => saveStockToPortfolio(userPortfolios[0].id, stock.id)) // associate the stock to the portfolio
+          // currently 5 is the hardcoded default stock. will have to write a function that grabs a
+          // users portoflios and allows users to choose which potfolio they want to save to
+        } else {
+          alert("This stock is already in your portfolio");
+        }
+      }
+    )
   }
 
   renderChart = () => {
@@ -31,7 +66,7 @@ class StockDisplay extends React.Component{
         <div className='row'>
           <Line data={{labels: dayArray,
             datasets: [{
-              // label: this.props.stock.symbol,
+              label: this.props.stock.symbol,
               // backgroundColor: 'rgb(255, 99, 132)',
               borderColor: 'rgb(255, 99, 132)',
               data: closeArray,
@@ -80,9 +115,10 @@ class StockDisplay extends React.Component{
         <React.Fragment>
           <div className='row'>
             <div className="col s6">
-              <img src={this.props.stock.logo} height="70" width="70"/>
+              <img src={this.props.stock.logo} height="70" width="70" alt=''/>
               <h5>{this.props.stock.companyName}({this.props.stock.symbol})</h5>
               <h3>{this.props.stock.price}</h3>
+              {this.props.currentUser ? <button onClick={this.handleClick}>Save Stock</button> : null}
             </div>
             <div className="col s6">
               {this.props.stock.description}
@@ -100,8 +136,15 @@ class StockDisplay extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    stock: state.stock
+    stock: state.stock,
+    currentUser: state.currentUser
   };
 }
 
-export default connect(mapStateToProps)(StockDisplay)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    saveStockToPortfolio: (currentUser, stock) => dispatch({type: "SAVE_STOCK_TO_PORTFOLIO", payload: {currentUser: currentUser, stock: stock}})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StockDisplay)

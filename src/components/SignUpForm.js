@@ -13,12 +13,20 @@ class SignUpForm extends React.Component {
       password: e.target.password.value
     }
 
-    createUser(newUser)
-      .then(createdUser => {
-        console.log(createdUser);
-        this.props.userPage(createdUser)
-        localStorage.setItem('currentUser', createdUser.id)
-      })
+    if (!newUser.name || !newUser.username || !newUser.password){
+      alert("Please fill all fields to create an account")
+    } else {
+      if (createUser(newUser) === "Username already taken" || createUser(newUser) === "User not created"){
+        alert("Username already taken")
+      } else {
+        createUser(newUser)
+          .then(createdUser => {
+            console.log(createdUser);
+            this.props.userPage(createdUser)
+            localStorage.setItem('currentUser', createdUser.id)
+          })
+      }
+    }
   }
 
   render(){

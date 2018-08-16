@@ -3,7 +3,8 @@ const defaultState = {
   stock: '',
   signUpState: false,
   loginState: false,
-  currentUser: null
+  currentUser: null,
+  // portfolio: ["aapl", "tsla", "fb"]
 }
 
 const reducer = (state = defaultState, action = {}) => {
@@ -20,6 +21,8 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, loginState: action.payload.loginState, currentUser: action.payload.currentUser, content: ''}
     case 'INVALID_STOCK_SYMBOL':
       return {...state, content: action.payload.content}
+    case 'SAVE_STOCK_TO_PORTFOLIO':
+      return {...state, currentUser: action.payload.currentUser, stock: action.payload.stock}
     default:
       return state
   }
