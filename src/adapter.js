@@ -53,6 +53,19 @@ export function createStock(stock) {
     // .then(stock => console.log(stock))
 }
 
+export function createPortfolio(portfolio) {
+  const url = `${baseURL}/portfolios`
+  const options = {
+    method: 'POST',
+    headers: {"Content-Type" : 'application/json'},
+    body: JSON.stringify({portfolio: portfolio})
+  }
+
+  return fetch(url, options)
+    .then(r => r.json())
+    // .then(portfolio => console.log(portfolio))
+}
+
 export function saveStockToPortfolio(portfolio_id, stock_id) {
   const url = `${baseURL}/stock_portfolios`
   const options = {
@@ -80,4 +93,28 @@ export function getPortfolios(currentUser) {
   return fetch(url)
     .then(r => r.json())
     // .then(userPortfolio => console.log(userPortfolio))
+}
+
+export function getPortfolioStocks(portfolioID) {
+  const url = `${baseURL}/portfolios/${portfolioID}`
+
+  return fetch(url)
+    .then(r => r.json())
+    // .then(stocks => console.log(stocks))
+}
+
+export function checkDuplicate(portfolio_id, stock_symbol) {
+
+}
+
+export function deleteStock(stockID) {
+  const url = `${baseURL}/stocks/${stockID}`
+
+  const options = {
+    method: "DELETE",
+    headers: {"Content-Type" : 'application/json'}
+  }
+
+  return fetch(url, options)
+    .then(r => r.json())
 }
