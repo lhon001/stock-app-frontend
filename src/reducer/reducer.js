@@ -5,7 +5,8 @@ const defaultState = {
   loginState: false,
   currentUser: null,
   UserPageDisplayState: null,
-  currentPortfolioStocks: []
+  currentPortfolioStocks: [],
+  currentPortfolioID: null
 }
 
 const reducer = (state = defaultState, action = {}) => {
@@ -24,6 +25,12 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, content: action.payload.content}
     case 'SAVE_STOCK_TO_PORTFOLIO':
       return {...state, currentUser: action.payload.currentUser, stock: action.payload.stock}
+    case 'SET_CURRENT_PORTFOLIO_STOCKS':
+      return {...state, currentPortfolioStocks: action.payload.currentPortfolioStocks}
+    case 'CURRENT_PORTFOLIO_ID':
+      return {...state, currentPortfolioID: action.payload.currentPortfolioID}
+    // case 'DELETE_STOCK': 
+    //   return {...state, currentPortfolioStocks: action.payload.currentPortfolioStocks}
     default:
       return state
   }

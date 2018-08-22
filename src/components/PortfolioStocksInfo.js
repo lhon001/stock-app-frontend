@@ -1,20 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { deleteStock, getPortfolioStocks } from '../adapter'
 
 class PortfolioStocksInfo extends React.Component {
-  state = {
-    stocks : this.props.currentInfoArray
-  }
 
   handleClick = (stock) => {
-    console.log(stock.id);
     deleteStock(stock.id)
     .then(resp => {
-      getPortfolioStocks(this.props.portfolioID)
+      getPortfolioStocks(this.props.currentID)
       .then(portfolioStocks => {
-        this.setState({
-          stocks : portfolioStocks
-        })
+        this.props.currentPortfolioStocks(portfolioStocks)
       })
     })
   }
@@ -41,7 +36,7 @@ class PortfolioStocksInfo extends React.Component {
         </thead>
 
         <tbody>
-          {this.props.stockInfoArray.map(detailedStock => {
+          {this.props.currentStocks.map(detailedStock => {
             return (
               <tr key={detailedStock.id}>
                 <td><button onClick={(e) => this.handleClick(detailedStock)}>X</button></td>
@@ -66,13 +61,27 @@ class PortfolioStocksInfo extends React.Component {
   }
 
   render() {
-    console.log("current portfolios stocks info: ", this.props.stockInfoArray);
+    console.log("current portfolios stocks info: ", this.props.currentStocks);
+    console.log("current portfolio ID: ", this.props.currentID);
     return (
       <React.Fragment>
-        {this.props.stockInfoArray.length > 0 ? this.renderStocks() : <h3>No Stocks Added</h3>}
+        {this.props.currentStocks.length > 0 ? this.renderStocks() : <h3>No Stocks Added</h3>}
       </React.Fragment>
     )
   }
 }
 
-export default PortfolioStocksInfo
+const mapStateToProps = (state) => {
+  return {
+    currentID: state.currentPortfolioID,
+    currentStocks: state.currentPortfolioStocks
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    currentPortfolioStocks: (portfolioStocks) => dispatch({type: 'SET_CURRENT_PORTFOLIO_STOCKS', payload: {currentPortfolioStocks: portfolioStocks}}),
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioStocksInfo)
