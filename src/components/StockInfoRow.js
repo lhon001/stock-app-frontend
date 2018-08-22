@@ -5,18 +5,20 @@ import { deleteStock, getPortfolioStocks, getStockInfo } from '../adapter'
 class StockInfoRow extends React.Component {
 
   handleClick = (stock) => {
+    console.log("before delete: ", this.props.currentPortfolioStocks);
     deleteStock(stock.id)
     .then(resp => {
       getPortfolioStocks(this.props.currentID)
       .then(portfolioStocks => {
-        console.log(portfolioStocks);
         this.props.stocksAfterDelete(portfolioStocks)
+        console.log("after delete: ", this.props.currentPortfolioStocks);
+        this.props.deleteStockInfo(stock.id)
       })
     })
   }
 
   render(){
-    console.log("this is inside render", this.props.currentStockInfo);
+    // console.log("this is inside render", this.props.currentStockInfo);
     return(
       <React.Fragment>
       {this.props.currentStockInfo.map(detailedStock => {
@@ -45,7 +47,7 @@ class StockInfoRow extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("inside mapStateToProps: ", state.currentStockInfo);
+  // console.log("inside mapStateToProps: ", state.currentStockInfo);
   return {
     currentPortfolioStocks: state.currentPortfolioStocks,
     currentID: state.currentPortfolioID,
@@ -56,6 +58,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     stocksAfterDelete: (portfolioStocks) => dispatch({type: 'SET_CURRENT_PORTFOLIO_STOCKS', payload: {currentPortfolioStocks: portfolioStocks}}),
+    deleteStockInfo: (stockID) => dispatch({type: "DELETE_STOCK_INFO", payload: {stockID: stockID}})
   }
 }
 

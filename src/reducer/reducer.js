@@ -36,6 +36,8 @@ const reducer = (state = defaultState, action = {}) => {
       // return {...state, currentStockInfo: action.payload.currentStockInfo}
     case 'RESET_STOCK_INFO_ARRAY':
       return {...state, currentStockInfo: []}
+    case 'DELETE_STOCK_INFO':
+      return {...state, currentStockInfo: [...state.currentStockInfo.filter( stock => stock.id !== action.payload.stockID)]}
     default:
       return state
   }
