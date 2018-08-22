@@ -6,7 +6,8 @@ const defaultState = {
   currentUser: null,
   UserPageDisplayState: null,
   currentPortfolioStocks: [],
-  currentPortfolioID: null
+  currentPortfolioID: null,
+  currentStockInfo: []
 }
 
 const reducer = (state = defaultState, action = {}) => {
@@ -29,8 +30,12 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, currentPortfolioStocks: action.payload.currentPortfolioStocks}
     case 'CURRENT_PORTFOLIO_ID':
       return {...state, currentPortfolioID: action.payload.currentPortfolioID}
-    // case 'DELETE_STOCK': 
-    //   return {...state, currentPortfolioStocks: action.payload.currentPortfolioStocks}
+    case 'STOCK_INFO':
+      console.log('inside STOCK_INFO: ', action.payload.currentStockInfo);
+      return {...state, currentStockInfo: [...state.currentStockInfo, action.payload.currentStockInfo]}
+      // return {...state, currentStockInfo: action.payload.currentStockInfo}
+    case 'RESET_STOCK_INFO_ARRAY':
+      return {...state, currentStockInfo: []}
     default:
       return state
   }
