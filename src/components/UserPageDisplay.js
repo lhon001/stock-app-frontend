@@ -22,30 +22,31 @@ class UserPageDisplay extends React.Component {
     })
     .then(() => {
       let tempArray = []
+      if (this.state.currentPortfolioStocks.length > 0){
       this.state.currentPortfolioStocks.forEach((stock) => {
-        console.log(stock);
         getStockInfo(stock.symbol)
         .then(stockInfo => {
-          // debugger
-          tempArray.push({...stockInfo, id:stock.id}) // stockInfo["id"] = stock.id
+          tempArray.push({...stockInfo, id:stock.id})
         })
         .then(() => {
           this.setState({
             stockInfoArray: tempArray
-          }, () => {
-            console.log("current stockInfoArray: ", this.state.stockInfoArray);
           })
         })
-      })
+      })}
+      else {
+        this.setState({stockInfoArray: []})
+      }
     })
 
   }
 
   render(){
+    console.log("current Portfolio ID: ", this.state.currentPortfolioID);
     return(
       <React.Fragment>
         <UserPortfolioTabs currentUser={this.props.currentUser} handleTabSelect={this.handleTabSelect}/>
-        {this.state.stockInfoArray.length > 0 ? <PortfolioStocksInfo stockInfoArray={this.state.stockInfoArray}/> : null}
+        <PortfolioStocksInfo stockInfoArray={this.state.stockInfoArray} portfolioID={this.state.currentPortfolioID}/>
       </React.Fragment>
     )
   }
@@ -57,4 +58,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(UserPageDisplay)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    currentPortfolioStocks: (portfolioStocks) => dispatch({type: 'SET_CURRENT_PORTFOLIO_STOCKS', payload: {currentPortfolioStocks: portfolioStocks}})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserPageDisplay)

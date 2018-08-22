@@ -19,40 +19,6 @@ class StockDisplay extends React.Component{
     const dayArray = this.props.stock.chart.map((day) => day.date)
   }
 
-
-  // handleClick = () => {
-  //   // check if stock exists in portfolio first
-  //   let userPortfolios = []
-  //   console.log('before: ', userPortfolios);
-  //   getPortfolios(this.props.currentUser)
-  //     .then(portfolios => {
-  //       return (
-  //         portfolios.forEach((singlePortfolio) => {
-  //           userPortfolios.push(singlePortfolio)
-  //         })
-  //       )
-  //     })
-  //
-  //   console.log("after: ", userPortfolios);
-  //
-  //   let currentUserStocks = []
-  //   getUsersStocks(this.props.currentUser)
-  //     .then(userStocks => {
-  //       console.log(userStocks);
-  //       currentUserStocks = userStocks.filter(stock => stock.companyName === this.props.stock.companyName)
-  //       if (!currentUserStocks.length > 0){
-  //         console.log(userPortfolios[0].id);
-  //         createStock(this.props.stock) // create the stock
-  //         .then(stock => saveStockToPortfolio(userPortfolios[0].id, stock.id)) // associate the stock to the portfolio
-  //         // currently 5 is the hardcoded default stock. will have to write a function that grabs a
-  //         // users portoflios and allows users to choose which potfolio they want to save to
-  //       } else {
-  //         alert("This stock is already in your portfolio");
-  //       }
-  //     }
-  //   )
-  // }
-
   renderChart = () => {
     const closeArray = this.props.stock.chart.map((day) => day.close)
     const dayArray = this.props.stock.chart.map((day) => day.date)

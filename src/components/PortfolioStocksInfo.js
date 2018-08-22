@@ -1,12 +1,22 @@
 import React from 'react'
-import { deleteStock } from '../adapter'
+import { deleteStock, getPortfolioStocks } from '../adapter'
 
 class PortfolioStocksInfo extends React.Component {
+  state = {
+    stocks : this.props.currentInfoArray
+  }
 
   handleClick = (stock) => {
     console.log(stock.id);
     deleteStock(stock.id)
-    .then(resp => console.log(resp))
+    .then(resp => {
+      getPortfolioStocks(this.props.portfolioID)
+      .then(portfolioStocks => {
+        this.setState({
+          stocks : portfolioStocks
+        })
+      })
+    })
   }
 
   renderStocks = () => {
@@ -14,6 +24,7 @@ class PortfolioStocksInfo extends React.Component {
       <table className="striped responsive-table">
         <thead>
           <tr>
+            <th></th>
             <th>Name</th>
             <th>Symbol</th>
             <th>Price</th>
@@ -32,8 +43,8 @@ class PortfolioStocksInfo extends React.Component {
         <tbody>
           {this.props.stockInfoArray.map(detailedStock => {
             return (
-              <tr>
-                <button onClick={(e) => this.handleClick(detailedStock)}>X</button>
+              <tr key={detailedStock.id}>
+                <td><button onClick={(e) => this.handleClick(detailedStock)}>X</button></td>
                 <td>{detailedStock.companyName}</td>
                 <td>{detailedStock.symbol}</td>
                 <td>{detailedStock.price}</td>
@@ -55,7 +66,7 @@ class PortfolioStocksInfo extends React.Component {
   }
 
   render() {
-    console.log(this.props.stockInfoArray);
+    console.log("current portfolios stocks info: ", this.props.stockInfoArray);
     return (
       <React.Fragment>
         {this.props.stockInfoArray.length > 0 ? this.renderStocks() : <h3>No Stocks Added</h3>}

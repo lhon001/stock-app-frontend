@@ -23,6 +23,12 @@ class UserPortfolioTabs extends React.Component {
   }
 
   renderPortfolios = () => {
+    // write function that takes all the portfolio IDs and returns lowest one
+    // 
+    // let tabValue =
+    // if (this.state.currentTab === null){
+    //
+    // }
     return (
       <div className='row'>
         <AppBar position="static">

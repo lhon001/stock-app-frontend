@@ -13,7 +13,6 @@ import { connect } from 'react-redux'
 class App extends Component {
 
   componentDidMount = () => {
-    // console.log('bananas');
     if (localStorage.getItem('currentUser')){
       getUser(localStorage.getItem('currentUser'))
         .then(userObj => this.props.refresh(userObj))
@@ -27,9 +26,9 @@ class App extends Component {
           <div className=" nav-wrapper">
             {/* <a className="brand-logo">StockR</a> */}
             <ul className="right">
-              <li>{this.props.currentUser ?  <UserLogout /> : null}</li>
-              <li>{this.props.currentUser ?  null : <UserSignUp />}</li>
-              <li>{this.props.currentUser ?  null : <UserLogin />}</li>
+              <li>{this.props.currentUser ? <UserLogout /> : null}</li>
+              <li>{this.props.currentUser ? null : <UserSignUp />}</li>
+              <li>{this.props.currentUser ? null : <UserLogin />}</li>
               <li>{this.props.currentUser ? <UserHome /> : null}</li>
             </ul>
           </div>

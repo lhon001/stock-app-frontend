@@ -4,7 +4,8 @@ const defaultState = {
   signUpState: false,
   loginState: false,
   currentUser: null,
-  UserPageDisplayState: null
+  UserPageDisplayState: null,
+  currentPortfolioStocks: []
 }
 
 const reducer = (state = defaultState, action = {}) => {

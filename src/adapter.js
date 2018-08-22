@@ -109,7 +109,6 @@ export function checkDuplicate(portfolio_id, stock_symbol) {
 
 export function deleteStock(stockID) {
   const url = `${baseURL}/stocks/${stockID}`
-
   const options = {
     method: "DELETE",
     headers: {"Content-Type" : 'application/json'}

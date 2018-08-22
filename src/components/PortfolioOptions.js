@@ -10,7 +10,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
 
-import { getPortfolios, createStock, saveStockToPortfolio } from '../adapter'
+import { getPortfolios, getPortfolioStocks, createStock, saveStockToPortfolio } from '../adapter'
 
 
 const styles = theme => ({
@@ -83,18 +83,22 @@ class PortfolioOptions extends React.Component {
       )
     })
 
-    // same stock object saved to different portfolios so
-    // deleting a stock in one portfolio will delete across ALL portfolios
-    // *** iterate through each portfolio and createStock on each portfolio
-
-    createStock(this.props.currentStock)
-      .then(stock => {
-        selectedPortfolioObjs.forEach(portfolioObj => {
-          return(
-            saveStockToPortfolio(portfolioObj.id, stock.id)
-          )
+    selectedPortfolioObjs.forEach(portfolioObj => {
+      let symbolArray = []
+      getPortfolioStocks(portfolioObj.id)
+      .then(portfolioStocks => {
+        portfolioStocks.forEach(stockObj => {
+          symbolArray.push(stockObj.symbol)
         })
+        if (!symbolArray.includes(this.props.currentStock.symbol)){
+          createStock(this.props.currentStock)
+          .then(createdStock => saveStockToPortfolio(portfolioObj.id, createdStock.id))
+        } else {
+          console.log("duplicates detected");
+        }
       })
+    })
+
   }
 
   render() {
