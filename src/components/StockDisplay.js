@@ -35,7 +35,7 @@ class StockDisplay extends React.Component{
               data: closeArray,
               maintainAspectRatio: false
             }]
-          }}/>
+          }} height={100} width={300}/>
         </div>
 
         <table>
