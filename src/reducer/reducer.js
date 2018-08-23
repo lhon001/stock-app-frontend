@@ -7,7 +7,8 @@ const defaultState = {
   UserPageDisplayState: null,
   currentPortfolioStocks: [],
   currentPortfolioID: null,
-  currentStockInfo: []
+  currentStockInfo: [],
+  currentUserPortfolios: []
 }
 
 const reducer = (state = defaultState, action = {}) => {
@@ -38,6 +39,8 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, currentStockInfo: []}
     case 'DELETE_STOCK_INFO':
       return {...state, currentStockInfo: [...state.currentStockInfo.filter( stock => stock.id !== action.payload.stockID)]}
+    case 'CURRENT_PORTFOLIOS':
+      return {...state, currentUserPortfolios: action.payload.currentUserPortfolios}
     default:
       return state
   }

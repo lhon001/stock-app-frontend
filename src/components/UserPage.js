@@ -27,6 +27,7 @@ class UserPage extends React.Component {
     .then(stocks => {
       // map through each stock and make a fetch request to api(getStockInfo)
       // then setState with that new array
+      if (stocks.length > 0){
       return (
         stocks.forEach((stock) => {
           getStockInfo(stock.symbol)
@@ -38,17 +39,18 @@ class UserPage extends React.Component {
             // *****************************************************
           })
         })
-      )
+      )}
     })
 
     getPortfolios(this.props.currentUser)
       .then(userPortfolios => {
+        if (userPortfolios.length > 0){
         return (
           userPortfolios.forEach((singlePortfolio) => {
             this.setState({...this.state,
             portfolios: [...this.state.portfolios, singlePortfolio]})
           })
-        )
+        )}
       })
   }
 

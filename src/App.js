@@ -36,7 +36,7 @@ class App extends Component {
         <SearchInput className='form'/>
         <Display />
       </div>
-    );
+    )
   }
 }
 

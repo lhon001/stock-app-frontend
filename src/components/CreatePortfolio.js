@@ -1,5 +1,5 @@
 import React from 'react'
-import { createPortfolio } from '../adapter'
+import { createPortfolio, getPortfolios } from '../adapter'
 import { connect } from 'react-redux'
 
 class CreatePortfolio extends React.Component {
@@ -12,7 +12,11 @@ class CreatePortfolio extends React.Component {
     console.log(this.state.newPortfolioName);
     let newPortfolio = {name: this.state.newPortfolioName, user_id: this.props.currentUser.id}
     createPortfolio(newPortfolio)
-    .then(createdPortfolio => console.log(createdPortfolio))
+    .then(createdPortfolio => {
+      getPortfolios(this.props.currentUser)
+      .then(portfolios => this.props.renderPortfolios(portfolios))
+    })
+
   }
 
   handleChange = (e) => {
@@ -34,8 +38,15 @@ class CreatePortfolio extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    currentUserPortfolios: state.currentUserPortfolios
   }
 }
 
-export default connect(mapStateToProps)(CreatePortfolio)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    renderPortfolios: (portfolios) => dispatch({type: 'CURRENT_PORTFOLIOS', payload: {currentUserPortfolios: portfolios}})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePortfolio)
