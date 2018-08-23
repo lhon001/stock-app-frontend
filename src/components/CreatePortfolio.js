@@ -17,6 +17,11 @@ class CreatePortfolio extends React.Component {
       getPortfolios(this.props.currentUser)
       .then(portfolios => this.props.renderPortfolios(portfolios))
     })
+    .then(() => {
+      this.setState({
+        newPortfolioName: ''
+      })
+    })
 
   }
 
@@ -30,7 +35,7 @@ class CreatePortfolio extends React.Component {
     return(
       // <button className="btn-small waves-effect waves-light material-icons left" onClick={this.handleClick}>Create New Portfolio</button>
       <form onSubmit={this.handleSubmit}>
-        <input placeholder='Enter new portfolio name' type="text" onChange={(e) => this.handleChange(e)} value={this.state.text}></input>
+        <input placeholder='Enter new portfolio name' type="text" onChange={(e) => this.handleChange(e)} value={this.state.newPortfolioName}></input>
         {/* <button className="btn-small waves-effect waves-light material-icons right" type="submit">Search</button> */}
       </form>
     )

@@ -5,6 +5,10 @@ import StockInfoRow from './StockInfoRow'
 
 class PortfolioStocksInfo extends React.Component {
 
+  componentDidMount(){
+    
+  }
+
   handleClick = () => {
     this.props.currentPortfolio(this.props.currentID)
     deletePortfolio(this.props.currentID)
@@ -12,6 +16,7 @@ class PortfolioStocksInfo extends React.Component {
   }
 
   render() {
+    console.log(this.props.currentStockInfo);
     return (
       <React.Fragment>
           <table className="striped responsive-table">
