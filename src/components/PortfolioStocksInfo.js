@@ -5,6 +5,10 @@ import StockInfoRow from './StockInfoRow'
 
 class PortfolioStocksInfo extends React.Component {
 
+  componentDidMount(){
+
+  }
+
   handleClick = () => {
     this.props.currentPortfolio(this.props.currentID)
     deletePortfolio(this.props.currentID)
