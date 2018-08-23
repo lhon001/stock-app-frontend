@@ -1,19 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { deleteStock, getPortfolioStocks } from '../adapter'
+import { deleteStock, getPortfolioStocks, deletePortfolio } from '../adapter'
 import StockInfoRow from './StockInfoRow'
 
 class PortfolioStocksInfo extends React.Component {
 
-  // handleClick = (stock) => {
-  //   deleteStock(stock.id)
-  //   .then(resp => {
-  //     getPortfolioStocks(this.props.currentID)
-  //     .then(portfolioStocks => {
-  //       this.props.currentPortfolioStocks(portfolioStocks)
-  //     })
-  //   })
-  // }
+  handleClick = () => {
+    this.props.currentPortfolio(this.props.currentID)
+    deletePortfolio(this.props.currentID)
+    this.props.currentPortfolioStocks(this.props.currentStocksInfo)
+  }
 
   render() {
     return (
@@ -21,7 +17,7 @@ class PortfolioStocksInfo extends React.Component {
           <table className="striped responsive-table">
             <thead>
               <tr>
-                <th></th>
+                <th><button onClick={this.handleClick}>X</button></th>
                 <th>Name</th>
                 <th>Symbol</th>
                 <th>Price</th>
@@ -54,10 +50,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     currentPortfolioStocks: (portfolioStocks) => dispatch({type: 'SET_CURRENT_PORTFOLIO_STOCKS', payload: {currentPortfolioStocks: portfolioStocks}}),
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    currentPortfolio: (portfolioID) => dispatch({type: 'DELETE_PORTFOLIO', payload: {portfolioID: portfolioID}}),
+    currentPortfolioStocks: (stocks) => dispatch({type: 'SET_CURRENT_PORTFOLIO_STOCKS', payload: {currentStockInfo: stocks}})
+  }
+}
 
-export default connect(mapStateToProps)(PortfolioStocksInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioStocksInfo)

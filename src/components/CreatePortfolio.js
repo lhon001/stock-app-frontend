@@ -13,6 +13,7 @@ class CreatePortfolio extends React.Component {
     let newPortfolio = {name: this.state.newPortfolioName, user_id: this.props.currentUser.id}
     createPortfolio(newPortfolio)
     .then(createdPortfolio => {
+      console.log(createdPortfolio);
       getPortfolios(this.props.currentUser)
       .then(portfolios => this.props.renderPortfolios(portfolios))
     })

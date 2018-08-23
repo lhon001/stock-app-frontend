@@ -41,6 +41,8 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, currentStockInfo: [...state.currentStockInfo.filter( stock => stock.id !== action.payload.stockID)]}
     case 'CURRENT_PORTFOLIOS':
       return {...state, currentUserPortfolios: action.payload.currentUserPortfolios}
+    case 'DELETE_PORTFOLIO':
+      return {...state, currentUserPortfolios: [...state.currentUserPortfolios.filter( portfolio => portfolio.id !== action.payload.portfolioID)]}
     default:
       return state
   }

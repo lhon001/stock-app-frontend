@@ -66,6 +66,17 @@ export function createPortfolio(portfolio) {
     // .then(portfolio => console.log(portfolio))
 }
 
+export function deletePortfolio(portfolioID) {
+  const url = `${baseURL}/portfolios/${portfolioID}`
+  const options = {
+    method: "DELETE",
+    headers: {"Content-Type" : 'application/json'}
+  }
+
+  return fetch(url, options)
+    .then(r => r.json())
+}
+
 export function saveStockToPortfolio(portfolio_id, stock_id) {
   const url = `${baseURL}/stock_portfolios`
   const options = {
@@ -101,10 +112,6 @@ export function getPortfolioStocks(portfolioID) {
   return fetch(url)
     .then(r => r.json())
     // .then(stocks => console.log(stocks))
-}
-
-export function checkDuplicate(portfolio_id, stock_symbol) {
-
 }
 
 export function deleteStock(stockID) {

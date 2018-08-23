@@ -15,9 +15,7 @@ class UserPortfolioTabs extends React.Component {
   componentDidMount() {
     getPortfolios(this.props.currentUser)
       .then(userPortfolios => {
-        console.log(userPortfolios);
         this.props.renderPortfolios(userPortfolios)
-        console.log(this.props.currentUserPortfolios);
       })
   }
 
