@@ -11,6 +11,10 @@ class StockDisplay extends React.Component{
     dateArray: []
   }
 
+  componentDidMount(){
+    this.props.resetStockInfoRow()
+  }
+
   setPriceArray = () => {
     const closeArray = this.props.stock.chart.map((day) => day.close)
   }
@@ -105,7 +109,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveStockToPortfolio: (currentUser, stock) => dispatch({type: "SAVE_STOCK_TO_PORTFOLIO", payload: {currentUser: currentUser, stock: stock}})
+    saveStockToPortfolio: (currentUser, stock) => dispatch({type: "SAVE_STOCK_TO_PORTFOLIO", payload: {currentUser: currentUser, stock: stock}}),
+    resetStockInfoRow: () => dispatch({type: "RESET_STOCK_INFO_ROW", payload: {currentPortfolioID: null}})
   }
 }
 

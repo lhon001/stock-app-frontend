@@ -1,5 +1,4 @@
 import React from 'react'
-
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
@@ -119,8 +118,8 @@ class PortfolioOptions extends React.Component {
               MenuProps={MenuProps}
             >
               {this.state.availablePortfolios.map(portfolio => {
-                console.log(this.state.selectedPortfolios.indexOf(portfolio))
-                console.log(portfolio)
+                // console.log(this.state.selectedPortfolios.indexOf(portfolio))
+                // console.log(portfolio)
                 return (
                 <MenuItem key={portfolio.id} value={portfolio.name}>
                   <Checkbox checked={this.state.selectedPortfolios.indexOf(portfolio.name) > -1} />
@@ -144,5 +143,4 @@ PortfolioOptions.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-// export default PortfolioOptions
 export default withStyles(styles, { withTheme: true })(PortfolioOptions)
