@@ -23,8 +23,8 @@ class App extends Component {
     return (
       <div className="container">
         <nav>
-          <div className=" nav-wrapper">
-            {/* <a className="brand-logo">StockR</a> */}
+          <div className="nav-wrapper">
+            <a className="brand-logo nav-title">StockR</a>
             <ul className="right">
               <li>{this.props.currentUser ? <UserLogout /> : null}</li>
               <li>{this.props.currentUser ? null : <UserSignUp />}</li>

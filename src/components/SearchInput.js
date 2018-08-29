@@ -30,6 +30,8 @@ class SearchInput extends React.Component{
   handleChange = (e) => {
     this.setState({
       input: e.target.value
+    }, () => {
+      console.log(this.state.input);
     })
   }
 

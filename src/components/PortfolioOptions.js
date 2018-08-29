@@ -144,5 +144,5 @@ PortfolioOptions.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-
+// export default PortfolioOptions
 export default withStyles(styles, { withTheme: true })(PortfolioOptions)
