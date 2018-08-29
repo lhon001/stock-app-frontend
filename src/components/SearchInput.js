@@ -20,11 +20,18 @@ class SearchInput extends React.Component{
           this.props.searchStock(resp)
         }
       })
+      .then(() => {
+        this.setState({
+          input: ''
+        })
+      })
   }
 
   handleChange = (e) => {
     this.setState({
       input: e.target.value
+    }, () => {
+      console.log(this.state.input);
     })
   }
 
@@ -32,7 +39,7 @@ class SearchInput extends React.Component{
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <input placeholder='Enter Stock Symbol (e.g. tsla)' type="text" onChange={(e) => this.handleChange(e)} value={this.state.text}></input>
+          <input placeholder='Enter Stock Symbol (e.g. tsla)' type="text" onChange={(e) => this.handleChange(e)} value={this.state.input}></input>
           {/* <button className="btn-small waves-effect waves-light material-icons right" type="submit">Search</button> */}
         </form>
       </div>

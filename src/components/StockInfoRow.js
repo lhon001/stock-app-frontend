@@ -18,15 +18,13 @@ class StockInfoRow extends React.Component {
   }
 
   render(){
-    // console.log("this is inside render", this.props.currentStockInfo);
     return(
       <React.Fragment>
       {this.props.currentStockInfo.map(detailedStock => {
-        // console.log(detailedStock);
         return (
           <tr key={detailedStock.id}>
             <td><button onClick={(e) => this.handleClick(detailedStock)}>X</button></td>
-            <td>{detailedStock.companyName}</td>
+            <td><a href={detailedStock.website} target="_blank">{detailedStock.companyName}</a></td>
             <td>{detailedStock.symbol}</td>
             <td>{detailedStock.price}</td>
             <td>{detailedStock.marketcap}</td>
@@ -47,7 +45,6 @@ class StockInfoRow extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  // console.log("inside mapStateToProps: ", state.currentStockInfo);
   return {
     currentPortfolioStocks: state.currentPortfolioStocks,
     currentID: state.currentPortfolioID,

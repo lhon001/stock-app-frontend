@@ -11,6 +11,10 @@ class StockDisplay extends React.Component{
     dateArray: []
   }
 
+  componentDidMount(){
+    this.props.resetStockInfoRow()
+  }
+
   setPriceArray = () => {
     const closeArray = this.props.stock.chart.map((day) => day.close)
   }
@@ -35,7 +39,7 @@ class StockDisplay extends React.Component{
               data: closeArray,
               maintainAspectRatio: false
             }]
-          }}/>
+          }} height={100} width={300}/>
         </div>
 
         <table>
@@ -78,9 +82,8 @@ class StockDisplay extends React.Component{
         <div className='row'>
           <div className="col s6">
             <img src={this.props.stock.logo} height="70" width="70" alt=''/>
-            <h5>{this.props.stock.companyName}({this.props.stock.symbol})</h5>
+            <h5><a href={this.props.stock.website} target="_blank">{this.props.stock.companyName}</a>({this.props.stock.symbol})</h5>
             <h3>{this.props.stock.price}</h3>
-            {/* {this.props.currentUser ? <button onClick={this.handleClick}>Save Stock</button> : null} */}
             {this.props.currentUser ? <PortfolioOptions currentUser={this.props.currentUser} currentStock={this.props.stock}/> : null}
           </div>
           <div className="col s6">
@@ -105,7 +108,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveStockToPortfolio: (currentUser, stock) => dispatch({type: "SAVE_STOCK_TO_PORTFOLIO", payload: {currentUser: currentUser, stock: stock}})
+    saveStockToPortfolio: (currentUser, stock) => dispatch({type: "SAVE_STOCK_TO_PORTFOLIO", payload: {currentUser: currentUser, stock: stock}}),
+    resetStockInfoRow: () => dispatch({type: "RESET_STOCK_INFO_ROW", payload: {currentPortfolioID: null}})
   }
 }
 

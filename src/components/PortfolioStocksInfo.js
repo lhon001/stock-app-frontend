@@ -16,6 +16,8 @@ class PortfolioStocksInfo extends React.Component {
   }
 
   render() {
+    console.log(this.props.currentID);
+    console.log(this.props.currentStockInfo);
     return (
       <React.Fragment>
           <table className="striped responsive-table">
@@ -38,7 +40,7 @@ class PortfolioStocksInfo extends React.Component {
             </thead>
 
             <tbody>
-              {this.props.currentStocks ? <StockInfoRow /> : null }
+              {this.props.currentID ? <StockInfoRow /> : null }
             </tbody>
           </table>
       </React.Fragment>
