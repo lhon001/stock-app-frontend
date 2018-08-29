@@ -82,9 +82,8 @@ class StockDisplay extends React.Component{
         <div className='row'>
           <div className="col s6">
             <img src={this.props.stock.logo} height="70" width="70" alt=''/>
-            <h5>{this.props.stock.companyName}({this.props.stock.symbol})</h5>
+            <h5><a href={this.props.stock.website} target="_blank">{this.props.stock.companyName}</a>({this.props.stock.symbol})</h5>
             <h3>{this.props.stock.price}</h3>
-            {/* {this.props.currentUser ? <button onClick={this.handleClick}>Save Stock</button> : null} */}
             {this.props.currentUser ? <PortfolioOptions currentUser={this.props.currentUser} currentStock={this.props.stock}/> : null}
           </div>
           <div className="col s6">
