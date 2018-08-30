@@ -7,7 +7,7 @@ class UserLogout extends React.Component{
     // console.log("loggin out");
     this.props.logoutUser()
     localStorage.removeItem('currentUser')
-  }
+    this.props.resetStockInfoRow()
 
   render(){
     return(
@@ -20,7 +20,8 @@ class UserLogout extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
   return{
-    logoutUser: () => dispatch({type: 'LOGOUT', payload: {loginState: false, currentUser: null}})
+    logoutUser: () => dispatch({type: 'LOGOUT', payload: {loginState: false, currentUser: null}}),
+    resetStockInfoRow: () => dispatch({type: "RESET_STOCK_INFO_ROW", payload: {currentPortfolioID: null}})
   }
 }
 
