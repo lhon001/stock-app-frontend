@@ -18,10 +18,9 @@ class SignUpForm extends React.Component {
     } else {
       createUser(newUser)
         .then(createdUser => {
-          if (createdUser === "Username already taken" || createdUser === "User not created"){
-            alert("Username already taken")
+          if (createdUser.error === "Username already taken" || createdUser.error === "User not created"){
+            alert(`${createdUser.error}`)
           } else {
-            console.log(createdUser);
             this.props.userPage(createdUser)
             localStorage.setItem('currentUser', createdUser.id)
           }
