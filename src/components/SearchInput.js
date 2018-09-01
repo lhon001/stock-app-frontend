@@ -12,7 +12,8 @@ class SearchInput extends React.Component{
   handleSubmit = (e) => {
     e.preventDefault()
 
-    getStockInfo(this.state.input)
+    if (this.state.input !== ''){
+      getStockInfo(this.state.input)
       .then(resp => {
         if (resp.status === 500){
           this.props.invalidStock()
@@ -25,6 +26,7 @@ class SearchInput extends React.Component{
           input: ''
         })
       })
+    }
   }
 
   handleChange = (e) => {
