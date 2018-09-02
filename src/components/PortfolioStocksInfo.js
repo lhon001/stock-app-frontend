@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { deleteStock, getPortfolioStocks, deletePortfolio } from '../adapter'
 import StockInfoRow from './StockInfoRow'
+import { Line } from 'react-chartjs-2'
 
 class PortfolioStocksInfo extends React.Component {
 

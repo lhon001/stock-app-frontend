@@ -17,6 +17,11 @@ class StockInfoRow extends React.Component {
     })
   }
 
+  showStockPage = (stock) => {
+    console.log(stock);
+    this.props.searchStock(stock)
+  }
+
   render(){
     return(
       <React.Fragment>
@@ -25,7 +30,7 @@ class StockInfoRow extends React.Component {
           <tr key={detailedStock.id}>
             <td><button onClick={(e) => this.handleClick(detailedStock)}>X</button></td>
             <td><a href={detailedStock.website} target="_blank">{detailedStock.companyName}</a></td>
-            <td>{detailedStock.symbol}</td>
+            <td><a onClick={(e) => this.showStockPage(detailedStock)}>{detailedStock.symbol}</a></td>
             <td>{detailedStock.price}</td>
             <td>{detailedStock.marketcap}</td>
             <td>{detailedStock.week52high}</td>
@@ -55,7 +60,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     stocksAfterDelete: (portfolioStocks) => dispatch({type: 'SET_CURRENT_PORTFOLIO_STOCKS', payload: {currentPortfolioStocks: portfolioStocks}}),
-    deleteStockInfo: (stockID) => dispatch({type: "DELETE_STOCK_INFO", payload: {stockID: stockID}})
+    deleteStockInfo: (stockID) => dispatch({type: "DELETE_STOCK_INFO", payload: {stockID: stockID}}),
+    searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}}),
   }
 }
 
