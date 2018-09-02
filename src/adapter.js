@@ -5,7 +5,17 @@ export function getStockInfo(symbol) {
   const url = `${baseURL}/search/${symbol}`
 
   return fetch(url)
-    .then(r => r.json())
+    .then(r => {
+      if (r.status === 500){
+        console.log("500 error")
+        return r
+      }
+      else {
+        console.log("no error")
+        return r.json()
+      }
+    })
+
 }
 
 export function createUser(userObj) {
