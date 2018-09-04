@@ -15,7 +15,13 @@ export function getStockInfo(symbol) {
         return r.json()
       }
     })
+}
 
+export function stockSymbolArray() {
+  const url = `${baseURL}/search`
+
+  return fetch(url)
+    .then(r => r.json())
 }
 
 export function createUser(userObj) {

@@ -1,13 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { getStockInfo } from '../adapter'
+import { getStockInfo, stockSymbolArray } from '../adapter'
 
 class SearchInput extends React.Component{
+
   state = {
     input: ''
   }
 
-  // {status: 500, error: "Internal Server Error", exception: "#<RestClient::NotFound: 404 Not Found>", traces: {…}}
+  componentDidMount(){
+    stockSymbolArray()
+    .then(stockList => {
+      
+    })
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
