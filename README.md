@@ -1,4 +1,4 @@
-# README stock-app-backend
+# README stock-app-frontend
 # Motivation/Inspiration
 -The 2008/2009 Market Crash left an indelible mark on millennials scaring them from seeing the stock market as an investment tool that will allow them to live comfortable when they retire.
 
@@ -49,7 +49,7 @@
       * -portfolio_id
 
 # Technologies Used
-API: IEX for stock data, TradingView for charting
+API: IEX for stock data, Chart.js for charting
 
 # README
 

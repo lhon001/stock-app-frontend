@@ -8,12 +8,12 @@ class SearchInput extends React.Component{
     input: ''
   }
 
-  componentDidMount(){
-    stockSymbolArray()
-    .then(stockList => {
-      
-    })
-  }
+  // componentDidMount(){
+  //   stockSymbolArray()
+  //   .then(stockList => {
+  //
+  //   })
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault()
