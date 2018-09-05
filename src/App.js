@@ -7,7 +7,7 @@ import UserLogin from './components/UserLogin'
 import UserLogout from './components/UserLogout'
 import SearchInput from './components/SearchInput'
 import UserHome from './components/UserHome'
-import { getStockInfo, createUser, getUser } from './adapter'
+import { getStockInfo, createUser, getUser, stockSymbolArray } from './adapter'
 import { connect } from 'react-redux'
 
 class App extends Component {
@@ -17,6 +17,19 @@ class App extends Component {
       getUser(localStorage.getItem('currentUser'))
         .then(userObj => this.props.refresh(userObj))
     }
+
+    // let symbols = []
+    // stockSymbolArray()
+    // .then(array => {
+    //   array.forEach((stock) => {
+    //     symbols.push(stock.symbol)
+    //     console.log(symbols);
+    //   })
+    // })
+    // .then(() => this.props.loadStockSymbols(symbols))
+    // .then(() => {
+    //   console.log("stocks loaded")
+    // })
   }
 
   render() {
@@ -46,13 +59,15 @@ const mapStateToProps = (state) => {
     stock: state.stock,
     signUpState: state.signUpState,
     loginState: state.loginState,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    stockSymbolArray: state.stockSymbolArray
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    refresh: (currentUser) => dispatch({type: 'SHOW_USER_PAGE', payload: {currentUser: currentUser, content: 'userPage'}})
+    refresh: (currentUser) => dispatch({type: 'SHOW_USER_PAGE', payload: {currentUser: currentUser, content: 'userPage'}}),
+    loadStockSymbols: (stockSymbolArray) => dispatch({type: 'LOAD_ALL_STOCK_SYMBOLS', payload: {stockSymbolArray: stockSymbolArray}})
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(App);

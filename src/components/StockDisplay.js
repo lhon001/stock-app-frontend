@@ -4,8 +4,9 @@ import { Line } from 'react-chartjs-2'
 import { ReactTable } from 'react-table'
 import { createStock, saveStockToPortfolio, getUsersStocks, getPortfolios } from '../adapter'
 import PortfolioOptions from './PortfolioOptions'
+import NewsDisplay from './NewsDisplay'
 
-class StockDisplay extends React.Component{
+class StockDisplay extends React.Component {
   state = {
     priceArray: [],
     dateArray: []
@@ -92,7 +93,11 @@ class StockDisplay extends React.Component{
         </div>
 
         <div className='row'>
-          {this.renderChart()}
+          {this.props.stock ? this.renderChart() : null}
+        </div>
+
+        <div>
+          <NewsDisplay />
         </div>
       </React.Fragment>
     )

@@ -7,14 +7,19 @@ export function getStockInfo(symbol) {
   return fetch(url)
     .then(r => {
       if (r.status === 500){
-        console.log(r)
         return r
       }
       else {
-        console.log("no error")
         return r.json()
       }
     })
+}
+
+export function getStockNews(symbol) {
+  const url = `${baseURL}/get_news/${symbol}`
+
+  return fetch(url)
+  .then(r => r.json())
 }
 
 export function stockSymbolArray() {
