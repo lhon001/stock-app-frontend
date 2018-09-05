@@ -4,6 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { getPortfolios } from '../adapter'
 import { connect } from 'react-redux'
+import { renderPortfolios } from '../actions/actions'
 
 class UserPortfolioTabs extends React.Component {
   state = {
@@ -11,8 +12,8 @@ class UserPortfolioTabs extends React.Component {
     portfolios: []
   }
 
-
   componentDidMount() {
+    let portfolios = []
     getPortfolios(this.props.currentUser)
       .then(userPortfolios => {
         this.props.renderPortfolios(userPortfolios)

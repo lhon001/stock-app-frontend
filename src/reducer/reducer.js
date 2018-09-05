@@ -8,7 +8,9 @@ const defaultState = {
   currentPortfolioStocks: [],
   currentPortfolioID: null,
   currentStockInfo: [],
-  currentUserPortfolios: []
+  currentUserPortfolios: [],
+  stockSymbolArray: [],
+  newsArray: []
 }
 
 const reducer = (state = defaultState, action = {}) => {
@@ -45,6 +47,10 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, currentUserPortfolios: action.payload.currentUserPortfolios}
     case 'DELETE_PORTFOLIO':
       return {...state, currentUserPortfolios: [...state.currentUserPortfolios.filter( portfolio => portfolio.id !== action.payload.portfolioID)]}
+    case 'LOAD_ALL_STOCK_SYMBOLS':
+      return {...state, stockSymbolArray: action.payload.stockSymbolArray}
+    case 'LOAD_NEWS':
+      return {...state, newsArray: action.payload.newsArray}
     default:
       return state
   }

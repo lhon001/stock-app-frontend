@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { getStockInfo, stockSymbolArray } from '../adapter'
+import { getStockInfo, stockSymbolArray, getStockNews } from '../adapter'
 
 class SearchInput extends React.Component{
 
@@ -8,12 +8,16 @@ class SearchInput extends React.Component{
     input: ''
   }
 
-  // componentDidMount(){
-  //   stockSymbolArray()
-  //   .then(stockList => {
-  //
-  //   })
-  // }
+  componentDidMount(){
+    // let symbols = []
+    // stockSymbolArray()
+    // .then(array => {
+    //   array.forEach((stock) => {
+    //     symbols.push(stock.symbol)
+    //     console.log(symbols);
+    //   })
+    // })
+  }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -26,6 +30,12 @@ class SearchInput extends React.Component{
         } else {
           this.props.searchStock(resp)
         }
+      })
+      .then(() => {
+        getStockNews(this.state.input)
+        .then(news => {
+          this.props.loadStockNews(news)
+        })
       })
       .then(() => {
         this.setState({
@@ -57,7 +67,8 @@ class SearchInput extends React.Component{
   const mapDispatchToProps = (dispatch) => {
     return {
       searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}}),
-      invalidStock: () => dispatch({type: "INVALID_STOCK_SYMBOL", payload: {content: 'invalid'}})
+      invalidStock: () => dispatch({type: "INVALID_STOCK_SYMBOL", payload: {content: 'invalid'}}),
+      loadStockNews: (newsArray) => dispatch({type:"LOAD_NEWS", payload: {newsArray: newsArray}})
     }
   }
 
