@@ -1,5 +1,5 @@
 // const baseURL = `http://localhost:3000/api/v1`
-const baseURL = `https://stock-app-backend.herokuapp.com/api/v1`
+const baseURL = `https://stock-application.herokuapp.com/api/v1`
 
 export function getStockInfo(symbol) {
   const url = `${baseURL}/search/${symbol}`
