@@ -20,7 +20,7 @@ export function getStockNews(symbol) {
 
   return fetch(url)
   .then(r => {
-    if (r.status === 504){
+    if (r.status !== 200){
       return r
     }
     else {

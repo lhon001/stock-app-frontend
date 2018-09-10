@@ -5,20 +5,19 @@ import { deleteStock, getPortfolioStocks, getStockInfo } from '../adapter'
 class StockInfoRow extends React.Component {
 
   handleClick = (stock) => {
-    console.log("before delete: ", this.props.currentPortfolioStocks);
+    // console.log("before delete: ", this.props.currentPortfolioStocks);
     deleteStock(stock.id)
     .then(resp => {
       getPortfolioStocks(this.props.currentID)
       .then(portfolioStocks => {
         this.props.stocksAfterDelete(portfolioStocks)
-        console.log("after delete: ", this.props.currentPortfolioStocks);
+        // console.log("after delete: ", this.props.currentPortfolioStocks);
         this.props.deleteStockInfo(stock.id)
       })
     })
   }
 
   showStockPage = (stock) => {
-    console.log(stock);
     this.props.searchStock(stock)
   }
 
@@ -61,7 +60,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     stocksAfterDelete: (portfolioStocks) => dispatch({type: 'SET_CURRENT_PORTFOLIO_STOCKS', payload: {currentPortfolioStocks: portfolioStocks}}),
     deleteStockInfo: (stockID) => dispatch({type: "DELETE_STOCK_INFO", payload: {stockID: stockID}}),
-    searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}}),
+    searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}})
   }
 }
 

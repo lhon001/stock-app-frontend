@@ -34,6 +34,7 @@ class SearchInput extends React.Component{
       .then(() => {
         getStockNews(this.state.input)
         .then(news => {
+          console.log(news);
           this.props.loadStockNews(news)
         })
       })
@@ -68,7 +69,7 @@ class SearchInput extends React.Component{
     return {
       searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}}),
       invalidStock: () => dispatch({type: "INVALID_STOCK_SYMBOL", payload: {content: 'invalid'}}),
-      loadStockNews: (newsArray) => dispatch({type:"LOAD_NEWS", payload: {newsArray: newsArray}})
+      loadStockNews: (news) => dispatch({type: "LOAD_NEWS", payload: {newsArray: news}})
     }
   }
 

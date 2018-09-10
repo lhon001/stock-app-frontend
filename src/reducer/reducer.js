@@ -51,6 +51,8 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, stockSymbolArray: action.payload.stockSymbolArray}
     case 'LOAD_NEWS':
       return {...state, newsArray: action.payload.newsArray}
+    case 'CLEAR_STOCK_NEWS':
+      return {...state, newsArray: []}
     default:
       return state
   }

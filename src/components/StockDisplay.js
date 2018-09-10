@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Line } from 'react-chartjs-2'
 import { ReactTable } from 'react-table'
-import { createStock, saveStockToPortfolio, getUsersStocks, getPortfolios } from '../adapter'
+import { createStock, saveStockToPortfolio, getUsersStocks, getPortfolios, getStockNews } from '../adapter'
 import PortfolioOptions from './PortfolioOptions'
 import NewsDisplay from './NewsDisplay'
 
@@ -14,6 +14,8 @@ class StockDisplay extends React.Component {
 
   componentDidMount(){
     this.props.resetStockInfoRow()
+    getStockNews(this.props.stock.symbol)
+    .then(news => this.props.loadStockNews(news))
   }
 
   setPriceArray = () => {
@@ -107,14 +109,17 @@ class StockDisplay extends React.Component {
 const mapStateToProps = (state) => {
   return {
     stock: state.stock,
-    currentUser: state.currentUser
+    currentUser: state.currentUser,
+    newsArray: state.newsArray
   };
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     saveStockToPortfolio: (currentUser, stock) => dispatch({type: "SAVE_STOCK_TO_PORTFOLIO", payload: {currentUser: currentUser, stock: stock}}),
-    resetStockInfoRow: () => dispatch({type: "RESET_STOCK_INFO_ROW", payload: {currentPortfolioID: null}})
+    resetStockInfoRow: () => dispatch({type: "RESET_STOCK_INFO_ROW", payload: {currentPortfolioID: null}}),
+    clearStockNews: () => dispatch({type: "CLEAR_STOCK_NEWS"}),
+    loadStockNews: (news) => dispatch({type: "LOAD_NEWS", payload: {newsArray: news}})
   }
 }
 

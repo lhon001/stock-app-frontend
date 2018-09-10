@@ -6,8 +6,9 @@ class NewsDisplay extends React.Component {
   renderNews = () => {
     return(
       this.props.newsArray.map((news) => {
+        console.log(news)
         return (
-          <li><a href={news.url} target="_blank">{news.headline}</a></li>
+          <li key={news.url}><a href={news.url} target="_blank">{news.headline}</a></li>
         )
       })
     )
@@ -16,9 +17,9 @@ class NewsDisplay extends React.Component {
   render(){
     return (
       <React.Fragment>
-        <h4>News Articles</h4>
+        <h5>News Articles</h5>
         <ul>
-          {this.renderNews()}
+          {this.props.newsArray.length > 0 ? this.renderNews() : <li>No News Found</li>}
         </ul>
       </React.Fragment>
     )
@@ -28,6 +29,7 @@ class NewsDisplay extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    stock: state.stock,
     newsArray: state.newsArray
   }
 }
