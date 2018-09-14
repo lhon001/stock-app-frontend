@@ -22,10 +22,8 @@ class UserLogin extends React.Component{
     console.log(UserLogin.propTypes);
     return(
       <div>
-        <button className="btn-small waves-effect waves-light material-icons right" onClick={this.props.loginUser}>Login</button>
-        {/* <Button color="primary" className={classes.button}>
-         Primary
-       </Button> */}
+        {/* <button className="btn-small waves-effect waves-light material-icons right" onClick={this.props.loginUser}>Login</button> */}
+        <Button onClick={this.props.loginUser}>Login</Button>
       </div>
     )
   }

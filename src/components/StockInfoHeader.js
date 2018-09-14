@@ -1,11 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { deleteStock, getPortfolioStocks, deletePortfolio } from '../adapter'
-import StockInfoRow from './StockInfoRow'
-import StockInfoHeader from './StockInfoHeader'
-import { Line } from 'react-chartjs-2'
 
-class PortfolioStocksInfo extends React.Component {
+class StockInfoHeader extends React.Component {
 
   handleClick = () => {
     this.props.currentPortfolio(this.props.currentID)
@@ -13,19 +10,24 @@ class PortfolioStocksInfo extends React.Component {
     this.props.currentPortfolioStocks(this.props.currentStocksInfo)
   }
 
-  render() {
-    return (
+  render(){
+    return(
       <React.Fragment>
-        {this.props.currentID ?
-          <table className="striped responsive-table">
-            <thead>
-              <StockInfoHeader />
-            </thead>
-            <tbody>
-              <StockInfoRow />
-            </tbody>
-          </table>
-          : null}
+        <tr>
+          <th><button onClick={this.handleClick}>X</button></th>
+          <th>Name</th>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>Market Cap</th>
+          <th>52 Week High</th>
+          <th>52 Week Low</th>
+          <th>Price-To-Book</th>
+          <th>Price-To-Sales</th>
+          <th>Latest EPS</th>
+          <th>Beta</th>
+          <th>Return on Equity</th>
+          <th>P/E Ratio</th>
+        </tr>
       </React.Fragment>
     )
   }
@@ -46,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PortfolioStocksInfo)
+export default connect(mapStateToProps, mapDispatchToProps)(StockInfoHeader)

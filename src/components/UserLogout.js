@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux'
 
 class UserLogout extends React.Component{
@@ -13,7 +14,8 @@ class UserLogout extends React.Component{
   render(){
     return(
       <div>
-        <button className="btn-small waves-effect waves-light material-icons right" onClick={this.handleClick}>Logout</button>
+        {/* <button className="btn-small waves-effect waves-light material-icons right" onClick={this.handleClick}>Logout</button> */}
+        <Button onClick={this.handleClick}>Logout</Button>
       </div>
     )
   }

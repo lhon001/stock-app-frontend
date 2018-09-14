@@ -38,8 +38,8 @@ class AlertDialog extends React.Component {
   render() {
     return (
       <div>
-        <button className="btn-small waves-effect waves-light material-icons right" onClick={this.handleClickOpen}>Delete Account</button>
-        {/* <Button onClick={this.handleClickOpen}>Delete Account</Button> */}
+        {/* <button className="btn-small waves-effect waves-light material-icons right" onClick={this.handleClickOpen}>Delete Account</button> */}
+        <Button onClick={this.handleClickOpen}>Delete Account</Button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

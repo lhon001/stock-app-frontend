@@ -15,10 +15,10 @@ class UserHome extends React.Component {
   render(){
     return (
       <div>
-        <button className="btn-small waves-effect waves-light material-icons right" onClick={this.handleClick}>
+        {/* <button className="btn-small waves-effect waves-light material-icons right" onClick={this.handleClick}>
           User Home
-        </button>
-        {/* <Button onClick={this.handleClick}>User Home</Button> */}
+        </button> */}
+        <Button onClick={this.handleClick}>User Home</Button>
       </div>
     )
   }
