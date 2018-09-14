@@ -39,7 +39,7 @@ class UserPortfolioTabs extends React.Component {
   render(){
     return(
       <React.Fragment>
-        {this.props.currentUserPortfolios ? this.renderPortfolios() : null}
+        {this.props.currentUserPortfolios.length > 0 ? this.renderPortfolios() : null}
       </React.Fragment>
     )
   }

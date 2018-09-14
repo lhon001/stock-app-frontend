@@ -58,7 +58,7 @@ class UserPage extends React.Component {
     // console.log(this.state.stocks);
     return (
       <div>
-        <h4>{this.props.currentUser.name}'s Account</h4>
+        {this.props.currentUser ? <h4>{this.props.currentUser.name}'s Account</h4> : null }
         <CreatePortfolio />
         <UserPageDisplay displayState={this.state.display} currentStocks={this.state.stocks} />
       </div>

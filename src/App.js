@@ -7,6 +7,7 @@ import UserLogin from './components/UserLogin'
 import UserLogout from './components/UserLogout'
 import SearchInput from './components/SearchInput'
 import UserHome from './components/UserHome'
+import DeleteAccount from './components/DeleteAccount'
 import { getStockInfo, createUser, getUser, stockSymbolArray } from './adapter'
 import { connect } from 'react-redux'
 
@@ -39,10 +40,11 @@ class App extends Component {
           <div className="nav-wrapper">
             <a className="brand-logo nav-title">StockR</a>
             <ul className="right">
-              <li>{this.props.currentUser ? <UserLogout /> : null}</li>
               <li>{this.props.currentUser ? null : <UserSignUp />}</li>
               <li>{this.props.currentUser ? null : <UserLogin />}</li>
+              <li>{this.props.currentUser ? <UserLogout /> : null}</li>
               <li>{this.props.currentUser ? <UserHome /> : null}</li>
+              <li>{this.props.currentUser ? <DeleteAccount /> : null}</li>
             </ul>
           </div>
         </nav>

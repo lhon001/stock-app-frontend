@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { getUser } from '../adapter'
+import Button from '@material-ui/core/Button';
 
 class UserHome extends React.Component {
 
@@ -17,6 +18,7 @@ class UserHome extends React.Component {
         <button className="btn-small waves-effect waves-light material-icons right" onClick={this.handleClick}>
           User Home
         </button>
+        {/* <Button onClick={this.handleClick}>User Home</Button> */}
       </div>
     )
   }

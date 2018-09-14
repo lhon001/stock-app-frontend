@@ -1,5 +1,17 @@
-// const baseURL = `http://localhost:3000/api/v1`
-const baseURL = `https://stock-app-backend.herokuapp.com/api/v1`
+const baseURL = `http://localhost:3000/api/v1`
+// const baseURL = `https://stock-app-backend.herokuapp.com/api/v1`
+
+
+export function deleteUser(user) {
+  const url = `${baseURL}/users/${user.id}`
+  const options = {
+    method: "DELETE",
+    headers: {'Content-Type': 'application/json'}
+  }
+
+  return fetch(url, options)
+  .then(r => r.json())
+}
 
 export function getStockInfo(symbol) {
   const url = `${baseURL}/search/${symbol}`

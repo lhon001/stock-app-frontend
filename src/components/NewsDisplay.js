@@ -6,7 +6,7 @@ class NewsDisplay extends React.Component {
   renderNews = () => {
     return(
       this.props.newsArray.map((news) => {
-        console.log(news)
+        // console.log(news)
         return (
           <li key={news.url}><a href={news.url} target="_blank">{news.headline}</a></li>
         )
