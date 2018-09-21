@@ -7,10 +7,6 @@ import PortfolioOptions from './PortfolioOptions'
 import NewsDisplay from './NewsDisplay'
 
 class StockDisplay extends React.Component {
-  state = {
-    priceArray: [],
-    dateArray: []
-  }
 
   componentDidMount(){
     this.props.resetStockInfoRow()
@@ -18,23 +14,17 @@ class StockDisplay extends React.Component {
     .then(news => this.props.loadStockNews(news))
   }
 
-  setPriceArray = () => {
-    const closeArray = this.props.stock.chart.map((day) => day.close)
-  }
-
-  setDateArray = () => {
-    const dayArray = this.props.stock.chart.map((day) => day.date)
-  }
-
   renderChart = () => {
     const closeArray = this.props.stock.chart.map((day) => day.close)
     const dayArray = this.props.stock.chart.map((day) => day.date)
+    console.log(dayArray);
 
     return (
       // <ReactTable />
       <div>
         <div className='row'>
-          <Line data={{labels: dayArray,
+          <Line data={
+            {labels: dayArray,
             datasets: [{
               label: this.props.stock.symbol,
               // backgroundColor: 'rgb(255, 99, 132)',

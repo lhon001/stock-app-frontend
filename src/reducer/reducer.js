@@ -10,7 +10,9 @@ const defaultState = {
   currentStockInfo: [],
   currentUserPortfolios: [],
   stockSymbolArray: [],
-  newsArray: []
+  newsArray: [],
+  portfolioGraphsPrices: [],
+  portfolioGraphsDates: []
 }
 
 const reducer = (state = defaultState, action = {}) => {
@@ -34,7 +36,7 @@ const reducer = (state = defaultState, action = {}) => {
     case 'CURRENT_PORTFOLIO_ID':
       return {...state, currentPortfolioID: action.payload.currentPortfolioID}
     case 'STOCK_INFO':
-      console.log('inside STOCK_INFO: ', action.payload.currentStockInfo);
+      // console.log('inside STOCK_INFO: ', action.payload.currentStockInfo);
       return {...state, currentStockInfo: [...state.currentStockInfo, action.payload.currentStockInfo]}
       // return {...state, currentStockInfo: action.payload.currentStockInfo}
     case 'RESET_STOCK_INFO_ARRAY':
@@ -55,6 +57,10 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, newsArray: []}
     case 'DELETE_USER':
       return {...state, currentUser: action.payload.currentUser}
+    case 'SET_PORTFOLIO_GRAPH_PRICES':
+      return {...state, portfolioGraphsPrices: action.payload.portfolioGraphsPrices}
+    case 'SET_PORTFOLIO_GRAPH_DATES':
+      return {...state, portfolioGraphsDates: action.payload.portfolioGraphsDates}
     default:
       return state
   }
