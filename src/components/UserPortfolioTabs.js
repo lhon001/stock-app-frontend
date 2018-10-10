@@ -38,32 +38,40 @@ class UserPortfolioTabs extends React.Component {
     )
   }
 
+  lineDataset = () => {
+    console.log(this.props.currentPortfolioGraphsPrices.length)
+    if (this.props.currentPortfolioGraphsPrices.length > 0){
+      let arr = this.props.currentPortfolioGraphsPrices.map((priceArr) => {
+        console.log("priceArr: ", priceArr);
+        return ({
+          label: "My First dataset",
+          borderColor: 'rgb(255, 99, 132)',
+          data: priceArr
+        })
+      })
+      return arr}
+    else {
+      return null
+    }
+  }
+
+  // move this to PortfolioStocksInfo?
   renderPortfolioGraphs = () => {
-    console.log("current graph prices: ", this.props.currentPortfolioGraphsPrices);
     return (
       <React.Fragment>
-        <Line data={{labels: this.props.currentPortfolioGraphsDates, datasets: [
-          		{
-          			label: "My First dataset",
-          			pointHighlightStroke: "rgba(220,220,220,1)",
-          			data: this.props.currentPortfolioGraphsPrices
-          		},
-          		{
-          			label: "My Second dataset",
-          			pointHighlightStroke: "rgba(151,187,205,1)",
-          			data: this.props.currentPortfolioGraphsPrices
-          		}
-          	]}
-          }/>
+        <Line data={{labels: this.props.currentPortfolioGraphsDates, datasets:
+            this.lineDataset()
+          	}}/>
       </React.Fragment>
     )
   }
 
   render(){
+    console.log("current graph prices length: ", this.props.currentPortfolioGraphsPrices);
     return(
       <React.Fragment>
         {/* {this.props.currentPortfolioID ? <PortfolioGraphs /> : null} */}
-        {this.props.currentPortfolioID ? this.renderPortfolioGraphs() : null}
+        {/* {this.props.currentPortfolioID ? this.renderPortfolioGraphs() : null} */}
         {this.props.currentUserPortfolios.length > 0 ? this.renderPortfolios() : null}
       </React.Fragment>
     )

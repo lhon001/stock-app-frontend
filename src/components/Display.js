@@ -19,7 +19,7 @@ class Display extends React.Component{
       case 'userPage':
         return <UserPage />
       case 'invalid':
-        return <h5>Invalid stock symbol, please try again</h5>
+        return <h5>"{this.props.invalidSymbol}" is an invalid stock symbol, please try again</h5>
       default:
         return null
     }
@@ -36,7 +36,8 @@ class Display extends React.Component{
 
 const mapStateToProps = (state) => {
   return {
-    content: state.content
+    content: state.content,
+    invalidSymbol: state.invalidSymbol
   }
 }
 

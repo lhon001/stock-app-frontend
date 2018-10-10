@@ -26,6 +26,7 @@ class SearchInput extends React.Component{
       getStockInfo(this.state.input)
       .then(resp => {
         if (resp.status === 500){
+          this.props.invalidInput(this.state.input)
           this.props.invalidStock()
         } else {
           this.props.searchStock(resp)
@@ -69,7 +70,8 @@ class SearchInput extends React.Component{
     return {
       searchStock: (stockObj) => dispatch({type: "SAVE_SEARCHED_STOCK", payload: {stockObj: stockObj, content: 'stockInfo'}}),
       invalidStock: () => dispatch({type: "INVALID_STOCK_SYMBOL", payload: {content: 'invalid'}}),
-      loadStockNews: (news) => dispatch({type: "LOAD_NEWS", payload: {newsArray: news}})
+      loadStockNews: (news) => dispatch({type: "LOAD_NEWS", payload: {newsArray: news}}),
+      invalidInput: (input) => dispatch({type: "INVALID_SYMBOL", payload: {invalidSymbol: input}})
     }
   }
 

@@ -17,7 +17,6 @@ class StockDisplay extends React.Component {
   renderChart = () => {
     const closeArray = this.props.stock.chart.map((day) => day.close)
     const dayArray = this.props.stock.chart.map((day) => day.date)
-    console.log(dayArray);
 
     return (
       // <ReactTable />
@@ -85,7 +84,8 @@ class StockDisplay extends React.Component {
         </div>
 
         <div className='row'>
-          {this.props.stock ? this.renderChart() : null}
+          {/* !!!!!!!!!!!!!!!!!!!!!!! */}
+          {this.props.stock && this.renderChart()}
         </div>
 
         <div>

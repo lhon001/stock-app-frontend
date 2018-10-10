@@ -1,6 +1,7 @@
 const defaultState = {
   content: '',
   stock: '',
+  invalidSymbol: '',
   signUpState: false,
   loginState: false,
   currentUser: null,
@@ -61,6 +62,8 @@ const reducer = (state = defaultState, action = {}) => {
       return {...state, portfolioGraphsPrices: action.payload.portfolioGraphsPrices}
     case 'SET_PORTFOLIO_GRAPH_DATES':
       return {...state, portfolioGraphsDates: action.payload.portfolioGraphsDates}
+    case 'INVALID_SYMBOL':
+      return {...state, invalidSymbol: action.payload.invalidSymbol}
     default:
       return state
   }

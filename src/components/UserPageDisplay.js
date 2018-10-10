@@ -37,13 +37,12 @@ class UserPageDisplay extends React.Component {
           })
           // console.log("stockPriceArray: ", stockPriceArray);
           priceArray.push(stockPriceArray)
-          // console.log("priceArray: ", priceArray);
           this.props.setPortfolioGraphsPrices(priceArray)
           this.props.setPortfolioGraphsDates(dayArray)
+          // console.log("priceArray: ", priceArray);
         })
       })
     })
-
   }
 
   render(){
