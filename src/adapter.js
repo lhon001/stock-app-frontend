@@ -23,7 +23,7 @@ export function getStockInfo(symbol) {
 
   return fetch(url)
     .then(r => {
-      if (r.status === 1500){
+      if (r.status === 500){
         return r
       }
       else {
