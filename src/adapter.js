@@ -1,6 +1,11 @@
-// const baseURL = `http://localhost:3000/api/v1`
-const baseURL = `https://stock-app-backend.herokuapp.com/api/v1`
+// local backend server
+// const baseURL = `http://localhost:3001/api/v1`
 
+// bypass backend and test from frontend API
+// const baseURL = `http://localhost:3000`
+
+// backend API
+const baseURL = `https://stock-app-backend.herokuapp.com/api/v1`
 
 export function deleteUser(user) {
   const url = `${baseURL}/users/${user.id}`
@@ -18,7 +23,7 @@ export function getStockInfo(symbol) {
 
   return fetch(url)
     .then(r => {
-      if (r.status === 500){
+      if (r.status === 1500){
         return r
       }
       else {

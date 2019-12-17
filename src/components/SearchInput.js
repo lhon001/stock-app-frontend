@@ -8,16 +8,16 @@ class SearchInput extends React.Component{
     input: ''
   }
 
-  componentDidMount(){
-    // let symbols = []
-    // stockSymbolArray()
-    // .then(array => {
-    //   array.forEach((stock) => {
-    //     symbols.push(stock.symbol)
-    //     console.log(symbols);
-    //   })
-    // })
-  }
+  // componentDidMount() {
+  //   let symbols = []
+  //   stockSymbolArray()
+  //   .then(array => {
+  //     array.forEach((stock) => {
+  //       symbols.push(stock.symbol)
+  //       console.log(symbols);
+  //     })
+  //   })
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -32,13 +32,13 @@ class SearchInput extends React.Component{
           this.props.searchStock(resp)
         }
       })
-      .then(() => {
-        getStockNews(this.state.input)
-        .then(news => {
-          console.log(news);
-          this.props.loadStockNews(news)
-        })
-      })
+      // .then(() => {
+      //   getStockNews(this.state.input)
+      //   .then(news => {
+      //     console.log(news);
+      //     this.props.loadStockNews(news)
+      //   })
+      // })
       .then(() => {
         this.setState({
           input: ''
