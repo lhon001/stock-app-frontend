@@ -1,5 +1,5 @@
-// local backend server
 // const baseURL = `http://localhost:3001/api/v1`
+// const baseURL = `https://stock-app-backend.herokuapp.com/api/v1`
 
 // bypass backend and test from frontend API
 // const baseURL = `http://localhost:3000`
